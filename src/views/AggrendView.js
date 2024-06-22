@@ -1,9 +1,9 @@
 import React from 'react';
-import InsultText from './InsultText';
-import AggyImage from './AggyImage';
-import Nuke from './Nuke';
-import MenuTable from './AggrendFoodTable';
-import MealCountTable from './MealCountTable';
+import InsultText from '../components/InsultText';
+import AggyImage from '../components/AggyImage';
+import Nuke from '../components/Nuke';
+import MenuTable from '../components/AggrendFoodTable';
+import MealCountTable from '../components/MealCountTable';
 
 const AggrendView = ({
     count,
