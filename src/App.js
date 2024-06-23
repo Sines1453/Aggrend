@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Header from './components/layout/TheHeader';
 import HomeView from './components/homeview/HomeView';
-import AggrendView from './components/aggrendview.js/AggrendView';
+import AggrendView from './components/aggrendview/AggrendView';
 
 function App() {
     const [count, setCount] = useState(0);
