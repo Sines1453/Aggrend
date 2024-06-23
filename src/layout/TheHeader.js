@@ -9,7 +9,7 @@ const Header = () => {
             variant='dark'
             expand='lg'>
             <Container>
-                <Navbar.Brand>My App</Navbar.Brand>
+                <Navbar.Brand>Sweepy's Paradise</Navbar.Brand>
                 <Nav className='mr-auto'>
                     <Nav.Link
                         as={Link}
