@@ -2,9 +2,9 @@ import { Container } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Header from './components/TheHeader';
-import HomeView from './views/HomeView';
-import AggrendView from './views/AggrendView';
+import Header from './components/AggrendView.jsx/TheHeader';
+import HomeView from './components/HomeView.jsx/HomeView';
+import AggrendView from './components/AggrendView.jsx/AggrendView';
 
 function App() {
     const [count, setCount] = useState(0);
