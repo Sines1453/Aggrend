@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Header from './components/layout/TheHeader';
-import HomeView from './components/homeview/HomeView';
-import AggrendView from './components/aggrendview/AggrendView';
+import HomeView from './components/home/HomeView';
+import AggrendView from './components/aggrend/AggrendView';
 
 function App() {
     const [count, setCount] = useState(0);
