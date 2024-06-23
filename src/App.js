@@ -2,7 +2,7 @@ import { Container } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Header from './components/AggrendView.jsx/TheHeader';
+import Header from './components/TheHeader';
 import HomeView from './components/HomeView.jsx/HomeView';
 import AggrendView from './components/AggrendView.jsx/AggrendView';
 
