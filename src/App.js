@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/layout/TheHeader';
 import HomeView from './components/home/HomeView';
 import AggrendView from './components/aggrend/AggrendView';
+import Users from './components/users/Users';
 
 function App() {
     const [count, setCount] = useState(0);
@@ -53,6 +54,10 @@ function App() {
                     <Route
                         path='/'
                         element={<HomeView />}
+                    />
+                    <Route
+                        path='/users'
+                        element={<Users />}
                     />
                 </Routes>
             </Container>
