@@ -6,7 +6,8 @@ const UserTable = ({ users }) => {
         <Table
             striped
             bordered
-            hover>
+            hover
+            variant='dark'>
             <thead>
                 <tr>
                     <th>ID</th>

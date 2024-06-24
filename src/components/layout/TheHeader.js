@@ -21,6 +21,11 @@ const Header = () => {
                         to='/faggot'>
                         Aggrend
                     </Nav.Link>
+                    <Nav.Link
+                        as={Link}
+                        to='/users'>
+                        Users
+                    </Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
