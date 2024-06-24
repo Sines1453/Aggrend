@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import UserTable from '/UserTable';
+import UserTable from './UserTable';
 import Pagination from './Pagination';
 
 const Users = () => {
