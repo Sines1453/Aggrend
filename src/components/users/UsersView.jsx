@@ -3,7 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import Pagination from './Pagination';
 
-const Users = () => {
+const UsersView = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -66,4 +66,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default UsersView;
