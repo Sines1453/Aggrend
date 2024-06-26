@@ -10,26 +10,28 @@ const UsersView = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const PAGE_SIZE_OPTIONS = [5, 10, 20];
+    const [totalItems, setTotalItems] = useState(0);
 
-    const fetchUsers = async () => {
+    const fetchUsers = async (page, size) => {
         setLoading(true);
         try {
             const response = await fetch(
-                'https://jsonplaceholder.typicode.com/users'
+                `https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=${size}`
             );
             if (!response.ok) throw new Error('Failed to fetch');
             const data = await response.json();
             setUsers(data);
-            setLoading(false);
+            setTotalItems(Number(response.headers.get('X-Total-Count') || '0'));
         } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
         }
     };
+
     useEffect(() => {
-        fetchUsers();
-    }, []);
+        fetchUsers(currentPage, pageSize);
+    }, [currentPage, pageSize]);
 
     return (
         <Container>
@@ -63,7 +65,7 @@ const UsersView = () => {
                             <Pagination
                                 currentPage={currentPage}
                                 pageSize={pageSize}
-                                totalItems={users.length}
+                                totalItems={totalItems}
                                 onChange={setCurrentPage}
                             />
                             <Button
