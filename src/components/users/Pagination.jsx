@@ -9,7 +9,7 @@ const Pagination = ({ currentPage, pageSize, totalItems, onChange }) => {
             {[...Array(totalPages)].map((_, index) => (
                 <BSPagination.Item
                     key={index + 1}
-                    active={(index = 1 === currentPage)}
+                    active={index + 1 === currentPage}
                     onClick={() => onChange(index + 1)}>
                     {index + 1}
                 </BSPagination.Item>
