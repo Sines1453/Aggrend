@@ -50,12 +50,7 @@ const UsersView = () => {
                     {error && <p>Error: {error}</p>}
                     {!loading && !error && (
                         <>
-                            <UserTable
-                                users={users.slice(
-                                    (currentPage - 1) * pageSize,
-                                    currentPage * pageSize
-                                )}
-                            />
+                            <UserTable users={users} />
                             <Form.Select
                                 className='mb-3'
                                 value={pageSize}
