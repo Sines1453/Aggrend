@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import Pagination from './Pagination';
@@ -11,8 +11,9 @@ const UsersView = () => {
     const [pageSize, setPageSize] = useState(10);
     const PAGE_SIZE_OPTIONS = [5, 10, 20];
     const [totalItems, setTotalItems] = useState(0);
+    const [retryCount, setRetryCount] = useState(0);
 
-    const fetchUsers = async (page, size) => {
+    const fetchUsers = useCallback(async (page, size, retries = 3) => {
         setLoading(true);
         try {
             const response = await fetch(
@@ -22,16 +23,23 @@ const UsersView = () => {
             const data = await response.json();
             setUsers(data);
             setTotalItems(Number(response.headers.get('X-Total-Count') || '0'));
+            setError(null);
+            setRetryCount(0);
         } catch (err) {
-            setError(err.message);
+            if (retries > 0) {
+                setTimeout(() => fetchUsers(page, size, retries - 1), 1000);
+                setRetryCount((prev) => prev + 1);
+            } else {
+                setError(`${err.message}. Retry failed after 3 attempts.`);
+            }
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchUsers(currentPage, pageSize);
-    }, [currentPage, pageSize]);
+    }, [currentPage, pageSize, fetchUsers]);
 
     return (
         <Container>
