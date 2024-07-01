@@ -31,7 +31,7 @@ const UserTable = ({ users, loading, error }) => {
                         <td
                             colSpan='4'
                             className='text-center text-danger'>
-                            Error:{' '}
+                            Error:{'error'}
                         </td>
                     </tr>
                 )}

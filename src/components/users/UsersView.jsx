@@ -50,11 +50,13 @@ const UsersView = () => {
             <Row>
                 <Col>
                     <h1>Users</h1>
-                    {loading && <p>Loading...</p>}
-                    {error && <p>Error: {error}</p>}
+                    <UserTable
+                        users={users}
+                        loading={loading}
+                        error={error}
+                    />
                     {!loading && !error && (
                         <>
-                            <UserTable users={users} />
                             <Form.Select
                                 className='mb-3'
                                 value={pageSize}
