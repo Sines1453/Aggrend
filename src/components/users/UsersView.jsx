@@ -3,7 +3,10 @@ import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import Pagination from './Pagination';
 
-const PAGE_SIZE_OPTIONS = [5, 10, 20];
+const PAGE_SIZE_OPTIONS = [
+    { value: 10, label: 'Show 10 items' },
+    { value: 25, label: 'Show 25 items' },
+];
 
 const UsersView = () => {
     const [users, setUsers] = useState([]);
@@ -58,11 +61,11 @@ const UsersView = () => {
                                 onChange={(e) =>
                                     setPageSize(Number(e.target.value))
                                 }>
-                                {PAGE_SIZE_OPTIONS.map((size) => (
+                                {PAGE_SIZE_OPTIONS.map((option) => (
                                     <option
-                                        key={size}
-                                        value={size}>
-                                        {size} per page{' '}
+                                        key={option.value}
+                                        value={option.value}>
+                                        {option.label}
                                     </option>
                                 ))}
                             </Form.Select>
