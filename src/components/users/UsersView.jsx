@@ -3,13 +3,14 @@ import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import Pagination from './Pagination';
 
+const PAGE_SIZE_OPTIONS = [5, 10, 20];
+
 const UsersView = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
-    const PAGE_SIZE_OPTIONS = [5, 10, 20];
     const [totalItems, setTotalItems] = useState(0);
     const [retryCount, setRetryCount] = useState(0);
 
