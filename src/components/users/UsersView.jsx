@@ -55,35 +55,29 @@ const UsersView = () => {
                         loading={loading}
                         error={error}
                     />
-                    {!loading && !error && (
-                        <>
-                            <Form.Select
-                                className='mb-3'
-                                value={pageSize}
-                                onChange={(e) =>
-                                    setPageSize(Number(e.target.value))
-                                }>
-                                {PAGE_SIZE_OPTIONS.map((option) => (
-                                    <option
-                                        key={option.value}
-                                        value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                            <Pagination
-                                currentPage={currentPage}
-                                pageSize={pageSize}
-                                totalItems={totalItems}
-                                onChange={setCurrentPage}
-                            />
-                            <Button
-                                variant='danger'
-                                onClick={() => setError('Simulated error')}>
-                                Trigger Error
-                            </Button>
-                        </>
-                    )}
+                    <Form.Select
+                        className='mb-3'
+                        value={pageSize}
+                        onChange={(e) => setPageSize(Number(e.target.value))}>
+                        {PAGE_SIZE_OPTIONS.map((option) => (
+                            <option
+                                key={option.value}
+                                value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </Form.Select>
+                    <Pagination
+                        currentPage={currentPage}
+                        pageSize={pageSize}
+                        totalItems={totalItems}
+                        onChange={setCurrentPage}
+                    />
+                    <Button
+                        variant='danger'
+                        onClick={() => setError('Simulated error')}>
+                        Trigger Error
+                    </Button>
                 </Col>
             </Row>
         </Container>
