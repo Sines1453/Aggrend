@@ -1,19 +1,45 @@
 import React from 'react';
 import { Pagination as BSPagination } from 'react-bootstrap';
 
-const Pagination = ({ currentPage, pageSize, totalItems, onChange }) => {
-    const totalPages = Math.ceil(totalItems / pageSize);
+const Pagination = ({ pagination, onChange }) => {
+    if (!pagination || pagination.totalPages === 0) {
+        return null;
+    }
 
     return (
         <BSPagination>
-            {[...Array(totalPages)].map((_, index) => (
-                <BSPagination.Item
-                    key={index + 1}
-                    active={index + 1 === currentPage}
-                    onClick={() => onChange(index + 1)}>
-                    {index + 1}
-                </BSPagination.Item>
-            ))}
+            <BSPagination.First
+                onClick={() => onChange(1)}
+                disabled={!pagination.hasPrevious}
+            />
+            <BSPagination.Prev
+                onClick={() => onChange(pagination.previousPage)}
+                disabled={!pagination.hasPrevious}
+            />
+
+            {Array.from(
+                { length: pagination.endPage - pagination.startPage + 1 },
+                (_, index) => (
+                    <BSPagination.Item
+                        key={pagination.startPage + index}
+                        active={
+                            pagination.startPage + index ===
+                            pagination.currentPage
+                        }
+                        onClick={() => onChange(pagination.startPage + index)}>
+                        {pagination.startPage + index}
+                    </BSPagination.Item>
+                )
+            )}
+
+            <BSPagination.Next
+                onClick={() => onChange(pagination.nextPage)}
+                disabled={!pagination.hasNext}
+            />
+            <BSPagination.Last
+                onClick={() => onChange(pagination.totalPages)}
+                disabled={!pagination.hasNext}
+            />
         </BSPagination>
     );
 };

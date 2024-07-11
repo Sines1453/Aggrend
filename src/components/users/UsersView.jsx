@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Container, Form, Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import Pagination from './Pagination';
@@ -15,35 +15,34 @@ const UsersView = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [totalItems, setTotalItems] = useState(0);
-    const [retryCount, setRetryCount] = useState(0);
-
-    const fetchUsers = useCallback(async (page, size, retries = 3) => {
-        setLoading(true);
-        try {
-            const response = await fetch(
-                `https://jsonplaceholder.typicode.com/users?_page=${page}&_limit=${size}`
-            );
-            if (!response.ok) throw new Error('Failed to fetch');
-            const data = await response.json();
-            setUsers(data);
-            setTotalItems(Number(response.headers.get('X-Total-Count') || '0'));
-            setError(null);
-            setRetryCount(0);
-        } catch (err) {
-            if (retries > 0) {
-                setTimeout(() => fetchUsers(page, size, retries - 1), 1000);
-                setRetryCount((prev) => prev + 1);
-            } else {
-                setError(`${err.message}. Retry failed after 3 attempts.`);
-            }
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    const [pagination, setPagination] = useState({});
 
     useEffect(() => {
-        fetchUsers(currentPage, pageSize);
-    }, [currentPage, pageSize, fetchUsers]);
+        const fetchUsers = async () => {
+            setLoading(true);
+            try {
+                const url = new URL(
+                    'https://sines.swpsolutions.com/api/v1.0/users'
+                );
+                url.searchParams.set('page', currentPage.toString());
+                url.searchParams.set('limit', pageSize.toString());
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch');
+
+                const { data, pagination } = await response.json();
+                setUsers(data);
+                setPagination(pagination);
+                setError(null);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUsers();
+    }, [currentPage, pageSize]);
 
     return (
         <Container>
@@ -68,9 +67,7 @@ const UsersView = () => {
                         ))}
                     </Form.Select>
                     <Pagination
-                        currentPage={currentPage}
-                        pageSize={pageSize}
-                        totalItems={totalItems}
+                        pagination={pagination}
                         onChange={setCurrentPage}
                     />
                     <Button
