@@ -31,7 +31,16 @@ const UserTable = ({ users, loading, error }) => {
                         <td
                             colSpan='4'
                             className='text-center text-danger'>
-                            Error:{'error'}
+                            Error: {error}
+                        </td>
+                    </tr>
+                )}
+                {!loading && !error && users.length === 0 && (
+                    <tr>
+                        <td
+                            colSpan='4'
+                            className='text-center'>
+                            No users available.
                         </td>
                     </tr>
                 )}
