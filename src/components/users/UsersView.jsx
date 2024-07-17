@@ -68,7 +68,11 @@ const UsersView = () => {
                     </Form.Select>
                     <Pagination
                         pagination={pagination}
-                        onChange={setCurrentPage}
+                        onChange={(newPage) => {
+                            setCurrentPage(newPage);
+                            setLoading(true);
+                        }}
+                        isLoading={loading}
                     />
                     <Button
                         variant='danger'
