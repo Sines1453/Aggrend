@@ -40,9 +40,11 @@ const UserTable = ({ users, loading, error }) => {
                     users.map((user) => (
                         <tr key={user.id}>
                             <td>{user.id}</td>
-                            <td>{user.name}</td>
+                            <td>
+                                {user.firstName} {user.lastName}
+                            </td>
                             <td>{user.email}</td>
-                            <td>{user.phone}</td>
+                            <td>{user.number}</td>
                         </tr>
                     ))}
             </tbody>
