@@ -4,6 +4,7 @@ import UserTable from './UserTable';
 import Pagination from './Pagination';
 
 const PAGE_SIZE_OPTIONS = [
+    { value: 5, label: 'Show 5 items' },
     { value: 10, label: 'Show 10 items' },
     { value: 25, label: 'Show 25 items' },
 ];
@@ -58,28 +59,36 @@ const UsersView = () => {
                         loading={loading}
                         error={error}
                     />
-                    <Form.Select
-                        className='mb-3'
-                        value={pageSize}
-                        onChange={(e) =>
-                            handlePageSizeChange(Number(e.target.value))
-                        }>
-                        {PAGE_SIZE_OPTIONS.map((option) => (
-                            <option
-                                key={option.value}
-                                value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <Pagination
-                        pagination={pagination}
-                        onChange={(newPage) => {
-                            setCurrentPage(newPage);
-                            setLoading(true);
-                        }}
-                        isLoading={loading}
-                    />
+                    <Row className='align-items-center mb-3'>
+                        <Col xs='auto'>
+                            <Form.Select
+                                aria-label='Select page size'
+                                value={pageSize}
+                                onChange={(e) =>
+                                    handlePageSizeChange(Number(e.target.value))
+                                }
+                                className='me-3'
+                                size='sm'>
+                                {PAGE_SIZE_OPTIONS.map((option) => (
+                                    <option
+                                        key={option.value}
+                                        value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Col>
+                        <Col>
+                            <Pagination
+                                pagination={pagination}
+                                onChange={(newPage) => {
+                                    setCurrentPage(newPage);
+                                    setLoading(true);
+                                }}
+                                isLoading={loading}
+                            />
+                        </Col>
+                    </Row>
                     <Button
                         variant='danger'
                         onClick={() => setError('Simulated error')}>
