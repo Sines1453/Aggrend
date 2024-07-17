@@ -14,7 +14,6 @@ const UsersView = () => {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
-    const [totalItems, setTotalItems] = useState(0);
     const [pagination, setPagination] = useState({});
 
     const handlePageSizeChange = (newPageSize) => {
