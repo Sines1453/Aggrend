@@ -17,6 +17,11 @@ const UsersView = () => {
     const [totalItems, setTotalItems] = useState(0);
     const [pagination, setPagination] = useState({});
 
+    const handlePageSizeChange = (newPageSize) => {
+        setPageSize(newPageSize);
+        setCurrentPage(1);
+    };
+
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);
@@ -57,7 +62,9 @@ const UsersView = () => {
                     <Form.Select
                         className='mb-3'
                         value={pageSize}
-                        onChange={(e) => setPageSize(Number(e.target.value))}>
+                        onChange={(e) =>
+                            handlePageSizeChange(Number(e.target.value))
+                        }>
                         {PAGE_SIZE_OPTIONS.map((option) => (
                             <option
                                 key={option.value}
