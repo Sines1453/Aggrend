@@ -12,11 +12,15 @@ const Pagination = ({ pagination, onChange, isLoading, currentPage }) => {
                 <>
                     <BSPagination.First
                         onClick={() => onChange(1)}
-                        disabled={isLoading}
+                        disabled={
+                            isLoading ? true : pagination.currentPage === 1
+                        }
                     />
                     <BSPagination.Prev
                         onClick={() => onChange(pagination.previousPage)}
-                        disabled={isLoading}
+                        disabled={
+                            isLoading ? true : pagination.currentPage === 1
+                        }
                     />
                 </>
             )}
@@ -38,11 +42,21 @@ const Pagination = ({ pagination, onChange, isLoading, currentPage }) => {
                 <>
                     <BSPagination.Next
                         onClick={() => onChange(pagination.nextPage)}
-                        disabled={isLoading}
+                        disabled={
+                            isLoading
+                                ? true
+                                : pagination.currentPage ===
+                                  pagination.totalPages
+                        }
                     />
                     <BSPagination.Last
                         onClick={() => onChange(pagination.totalPages)}
-                        disabled={isLoading}
+                        disabled={
+                            isLoading
+                                ? true
+                                : pagination.currentPage ===
+                                  pagination.totalPages
+                        }
                     />
                 </>
             )}
