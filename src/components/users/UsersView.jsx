@@ -29,8 +29,6 @@ const UsersView = () => {
                 const url = new URL(
                     'https://sines.swpsolutions.com/api/v1.0/users'
                 );
-                url.searchParams.set('page', currentPage.toString());
-                url.searchParams.set('limit', pageSize.toString());
 
                 const response = await fetch(url);
                 if (!response.ok) throw new Error('Failed to fetch');
