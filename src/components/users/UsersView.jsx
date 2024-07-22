@@ -49,52 +49,48 @@ const UsersView = () => {
 
     return (
         <Container>
-            <Row>
-                <Col>
-                    <h1>Users</h1>
-                    <UserTable
-                        users={users}
-                        loading={loading}
-                        error={error}
+            <h1>Users</h1>
+            <UserTable
+                users={users}
+                loading={loading}
+                error={error}
+            />
+            <Row className='align-items-center mb-3 justify-content-end'>
+                <Col xs='auto'>
+                    <Form.Select
+                        aria-label='Select page size'
+                        value={pageSize}
+                        onChange={(e) =>
+                            handlePageSizeChange(Number(e.target.value))
+                        }
+                        className='me-3'
+                        size='sm'>
+                        {PAGE_SIZE_OPTIONS.map((option) => (
+                            <option
+                                key={option.value}
+                                value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </Form.Select>
+                </Col>
+                <Col xs='auto'>
+                    <Pagination
+                        pagination={pagination}
+                        onChange={(newPage) => {
+                            setCurrentPage(newPage);
+                            setLoading(true);
+                        }}
+                        isLoading={loading}
+                        currentPage={currentPage}
                     />
-                    <Row className='align-items-center mb-3'>
-                        <Col xs='auto'>
-                            <Form.Select
-                                aria-label='Select page size'
-                                value={pageSize}
-                                onChange={(e) =>
-                                    handlePageSizeChange(Number(e.target.value))
-                                }
-                                className='me-3'
-                                size='sm'>
-                                {PAGE_SIZE_OPTIONS.map((option) => (
-                                    <option
-                                        key={option.value}
-                                        value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                        </Col>
-                        <Col>
-                            <Pagination
-                                pagination={pagination}
-                                onChange={(newPage) => {
-                                    setCurrentPage(newPage);
-                                    setLoading(true);
-                                }}
-                                isLoading={loading}
-                                currentPage={currentPage}
-                            />
-                        </Col>
-                    </Row>
-                    <Button
-                        variant='danger'
-                        onClick={() => setError('Simulated error')}>
-                        Trigger Error
-                    </Button>
                 </Col>
             </Row>
+            <Button
+                variant='danger'
+                onClick={() => setError('Simulated error')}>
+                Trigger Error
+            </Button>
         </Container>
     );
 };
