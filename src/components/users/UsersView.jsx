@@ -84,6 +84,7 @@ const UsersView = () => {
                                     setLoading(true);
                                 }}
                                 isLoading={loading}
+                                currentPage={currentPage}
                             />
                         </Col>
                     </Row>

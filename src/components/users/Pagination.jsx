@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pagination as BSPagination } from 'react-bootstrap';
 
-const Pagination = ({ pagination, onChange, isLoading }) => {
+const Pagination = ({ pagination, onChange, isLoading, currentPage }) => {
     if (!pagination || pagination.totalPages <= 1) {
         return null;
     }
@@ -26,10 +26,7 @@ const Pagination = ({ pagination, onChange, isLoading }) => {
                 (_, index) => (
                     <BSPagination.Item
                         key={pagination.startPage + index}
-                        active={
-                            pagination.startPage + index ===
-                            pagination.currentPage
-                        }
+                        active={pagination.startPage + index === currentPage}
                         onClick={() => onChange(pagination.startPage + index)}
                         disabled={isLoading}>
                         {pagination.startPage + index}
